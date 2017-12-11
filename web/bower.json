@@ -1,0 +1,29 @@
+{
+  "name": "KerasSimpsons Results Visualization",
+  "homepage": "https://github.com/dgutman/KerasSimpsons_Tensorflow",
+  "description": "A quick widget to view the various input and output images I am feeding into a Deep Learning Model",
+  "main": "index.html",
+  "keywords": [
+    "deep",
+    "learnings",
+    "simpsons",
+    "nvidia",
+    "keras",
+    "gpu"
+  ],
+  "authors": [
+    "David A Gutman"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webix": "^5.1.0",
+    "jquery": "^3.2.1"
+  }
+}

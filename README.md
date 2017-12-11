@@ -12,6 +12,43 @@ and has code from here
 https://github.com/alexattia/SimpsonRecognition.git
 
 
+## Setting up my virtualenvironment in python
+https://www.pyimagesearch.com/2017/09/25/configuring-ubuntu-for-deep-learning-with-python/
+
+
+sudo pip install virtualenv virtualenvwrapper
+
+mkvirtualenv simpsonsKeras 
 
 ## To start off
- wget https://www.kaggle.com/alexattia/the-simpsons-characters-dataset/downloads/the-simpsons-characters-dataset.zip
+Download the data set from here:
+https://www.kaggle.com/alexattia/the-simpsons-characters-dataset
+
+
+mkdir rawImageData
+cd rawImageData
+unzip ~/Downloads/the-simpsons-character-dataset.zip
+
+
+
+
+
+### This contains the following files
+annotation.txt
+characters_illustration.png
+kaggle_simpson_testset
+number_pic_char.csv
+simpsons_dataset.tar.gz
+weights.best.hdf5
+
+
+## The file we are interested in for now is simpsons_data.tar.gz
+tar -zxvf simpsons_data.tar.gz
+
+### the rawImageData should only consists of the JPEG data, the files above should be moved to
+simpsonsZipData or similar folder
+## also moves the kaggle_simpson_testset into the root directory for the project as these contain
+## images we will use for validation, at least for now
+
+
+
