@@ -58,3 +58,10 @@ ln -s ../RawImageData/
 bower install
 
 python -m SimpleHTTPServer
+
+
+### virtual environemnt
+
+mkvirtualenv KerasSimpsons -r requirements.txt
+
+
