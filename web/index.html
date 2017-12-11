@@ -33,7 +33,84 @@
         $$("mainImgTable").parse(simpsonsData_JSON)
     })
 
-    // type: {
+   
+
+    var mainThumbGallery = {
+        rows: [
+				{  
+					gravity: 0.1,
+					cols:
+					 [
+					 { id: "imgCount", view: "template", template: "imgCount" },
+					 { id: "imgClasses", view: "template", template: "imgClasses" },
+					 { id: "thumbTempalte", view: "template", template: "ChangeThumbTemplate" }
+
+            	]	
+            },
+            {
+                view: "dataview",
+                id: "mainThumbGallery",
+                autoconfig: true,
+                select: true,
+                type: {
+                    height: 140
+                },
+                template: "<img src='#fileWpath#' class='template-image' >"
+            }
+        ]
+    }
+
+
+    webix.ui({
+        rows: [{
+                view: "template",
+                type: "header",
+                template: "Keras Simpsons Model Viewer"
+            },
+            {
+                cols: [{
+
+                        id: "mainImgTable",
+                        view: "dataview",
+                        autoConfig: true,
+                        fixedRowHeight: false,
+                        select: true,
+                        gravity: 0.2,	
+                        //url: "./simpsonsImgMetaData.json",
+                        type: {
+                            template: "#label# <img src='#sampleImg.fileWpath#'  class='template-image'  >",
+                            height: 140
+                        },
+                        on: {
+                            "onAfterSelect": function(id) {
+                             		$$("imgClasses").setHTML( $$("mainImgTable").count());
+                                selectedDataSet = $$("mainImgTable").getItem(id);
+                                		// console.log(selectedDataSet);
+		                        $$("mainThumbGallery").clearAll();
+                                $$("mainThumbGallery").parse( selectedDataSet.imgSet);
+
+								  // ]},m.setHTML("HII"
+								  	$$("imgCount").setHTML( $$("mainThumbGallery").count());
+                                 }
+                        }
+
+                    },
+                    mainThumbGallery
+                ]
+
+
+            }
+
+
+
+        ]
+    })
+    </script>
+</body>
+
+</html>
+
+ <!-- // type: {
     //        height: 60,
     //    },
     //    template:"<div class='webix_strong'>#title#</div> Year: #year#, rank: #rank#",
@@ -109,84 +186,4 @@
     //     { cols:[
     //   { view:"button", label: "addRow", width: 140, click: function() { webix.message("Row added"); dynRowAdd() } },
     //   { view:"button", label: "addColumn", width: 140, click: function() { webix.message("Column added"); dynColAdd() }},
-    //   {}
-
-    var mainThumbGallery = {
-        rows: [
-				{  
-					gravity: 0.1,
-					cols:
-					 [
-					 { id: "imgCount", view: "template", template: "imgCount" },
-					 { id: "imgClasses", view: "template", template: "imgClasses" },
-					 { id: "thumbTempalte", view: "template", template: "ChangeThumbTemplate" }
-
-            	]	
-            },
-            {
-                view: "dataview",
-                id: "mainThumbGallery",
-                autoconfig: true,
-                select: true,
-                type: {
-                    height: 140
-                },
-                template: "<img src='#fileWpath#' class='template-image' >"
-            }
-        ]
-    }
-
-
-    webix.ui({
-        rows: [{
-                view: "template",
-                type: "header",
-                template: "Keras Simpsons Model Viewer"
-            },
-            {
-                cols: [{
-
-                        id: "mainImgTable",
-                        view: "dataview",
-                        autoConfig: true,
-                        fixedRowHeight: false,
-                        select: true,
-                        gravity: 0.2,	
-                        //url: "./simpsonsImgMetaData.json",
-                        type: {
-                            template: "#label# <img src='#sampleImg.fileWpath#'  class='template-image'  >",
-                            height: 140
-                        },
-                        on: {
-                            "onAfterSelect": function(id) {
-                             // webix.message("DOH");
-                             //    webix.message(id);
-                             		$$("imgClasses").setHTML( $$("mainImgTable").count());
-
-
-
-                                selectedDataSet = $$("mainImgTable").getItem(id);
-                                		// console.log(selectedDataSet);
-		                        $$("mainThumbGallery").clearAll();
-                                $$("mainThumbGallery").parse( selectedDataSet.imgSet);
-
-								  // ]},m.setHTML("HII"
-								  	$$("imgCount").setHTML( $$("mainThumbGallery").count());
-                                 }
-                        }
-
-                    },
-                    mainThumbGallery
-                ]
-
-
-            }
-
-
-
-        ]
-    })
-    </script>
-</body>
-
-</html>
+    //   {} -->

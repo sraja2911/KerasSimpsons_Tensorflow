@@ -52,3 +52,9 @@ simpsonsZipData or similar folder
 
 
 
+## setting up web app
+cd web
+ln -s ../RawImageData/
+bower install
+
+python -m SimpleHTTPServer
