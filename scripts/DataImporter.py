@@ -1,4 +1,7 @@
 class DataImporter:
+    def importImagesToMongoDb(self):
+        pass
+
     def determineImageUrls(self):
         pass
 
