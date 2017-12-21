@@ -3,6 +3,7 @@ from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
+from shutil import copyfile
 import os
 import sys
 import tarfile
@@ -14,10 +15,27 @@ data_root = os.path.join('..', 'data', 'extract', 'simpsons-keras', 'kaggle_simp
 img_width, img_height = 64, 64
 train_data_dir = os.path.join('..', 'data', 'extract', 'simpsons_dataset')
 
+tmp_dir = os.path.join('..', 'data', 'tmp')
+
+fileCharacterClass = re.compile('[a-zA-Z_]+(?=[0-9]+)')
+
+tmp_test_set_path = os.path.join(tmp_dir, 'test_set')
+if not os.path.exists(tmp_test_set_path):
+    os.mkdir(tmp_test_set_path)
+
 pre_validation_data_dir = os.path.join('..', 'data', 'extract', 'kaggle_simpson_testset')
 for path in os.listdir(pre_validation_data_dir):
-    if os.path.isfile(path):
-        pass
+    fullPath = os.path.join(pre_validation_data_dir, path)
+    if os.path.isfile(fullPath):
+        pathSplit = path.split('.')
+        fileExtension = pathSplit[len(pathSplit)-1]
+        if fileExtension == 'jpeg' or fileExtension == 'jpg':
+            matches = fileCharacterClass.findall(path)
+            newFolderPath = os.path.join(tmp_dir, 'test_set', matches[0][:len(matches[0])-1])
+            if not os.path.exists(newFolderPath):
+                os.mkdir(newFolderPath)
+            newPath = os.path.join(tmp_dir, 'test_set', matches[0][:len(matches[0])-1], path)
+            copyfile(fullPath, newPath)
 
 validation_data_dir = os.path.join('..', 'data', 'extract', 'kaggle_simpson_testset')
 
@@ -99,5 +117,7 @@ for batch in train_datagen.flow(x, batch_size=1, save_to_dir=os.path.join('..', 
 
 train_generator = train_datagen.flow_from_directory(train_data_dir, target_size=(img_width, img_height), batch_size=batch_size, class_mode='categorical')
 
-validation_generator = valid_datagen.flow_from_directory(validation_data_dir, target_size=(img_width, img_height), batch_size=batch_size, class_mode='categorical')
+validation_generator = valid_datagen.flow_from_directory(tmp_test_set_path, target_size=(img_width, img_height), batch_size=batch_size, class_mode='categorical')
+
+model.fit_generator(train_generator, epochs=epochs, validation_data=validation_generator)
 
