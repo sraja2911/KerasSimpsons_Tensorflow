@@ -65,3 +65,5 @@ python -m SimpleHTTPServer
 mkvirtualenv KerasSimpsons -r requirements.txt
 
 
+We want these plots:
+https://medium.com/alex-attia-blog/the-simpsons-character-recognition-using-keras-d8e1796eae36
