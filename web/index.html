@@ -5,18 +5,14 @@
     <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
     <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
     <link rel="stlyesheet" href="css/facetCSS.css" type="text/css">
+    <style>
+    /* Key parameter for setting up my template!! New CSS Trick below */
 
-<style>
-
-/* Key parameter for setting up my template!! New CSS Trick below */
-
-.template-image {
-    width: 100%;
-    height: inherit;
-}
-
-</style>
-
+    .template-image {
+        width: 100%;
+        height: inherit;
+    }
+    </style>
 </head>
 
 <body>
@@ -33,32 +29,54 @@
         $$("mainImgTable").parse(simpsonsData_JSON)
     })
 
-   
+
 
     var mainThumbGallery = {
-        rows: [
-				{  
-					gravity: 0.1,
-					cols:
-					 [
-					 { id: "imgCount", view: "template", template: "imgCount" },
-					 { id: "imgClasses", view: "template", template: "imgClasses" },
-					 { id: "thumbTempalte", view: "template", template: "ChangeThumbTemplate" }
+        rows: [{
+                gravity: 0.1,
+                cols: [
+                    { id: "imgCount", view: "template", template: "imgCount" },
+                    { id: "imgClasses", view: "template", template: "imgClasses" },
+                    { id: "thumbTempalte", view: "template", template: "ChangeThumbTemplate" }
 
-            	]	
+                ]
             },
             {
                 view: "dataview",
                 id: "mainThumbGallery",
                 autoconfig: true,
                 select: true,
+                multiselect: true,
+                drag: true,
                 type: {
                     height: 140
                 },
-                template: "<img src='#fileWpath#' class='template-image' >"
+                template: "<img src='#fileWpath#'  class='template-image' >"
             }
         ]
     }
+
+
+    dragAndDropTarget = {gravity: 0.2, 
+    	rows: [
+
+    	{view:"template",template:"Drag And Drop Target", gravity: 0.2},
+    	{
+
+        view: "dataview",
+        id: "dragTarget",
+        autoconfig: true,
+        select: true,
+        multiselect: true,
+        drag: true,
+
+        type: {
+            height: 140
+        },
+        template: "<img src='#fileWpath#' class='template-image' >"
+    }]}
+
+
 
 
     webix.ui({
@@ -75,7 +93,7 @@
                         autoConfig: true,
                         fixedRowHeight: false,
                         select: true,
-                        gravity: 0.2,	
+                        gravity: 0.2,
                         //url: "./simpsonsImgMetaData.json",
                         type: {
                             template: "#label# <img src='#sampleImg.fileWpath#'  class='template-image'  >",
@@ -83,19 +101,20 @@
                         },
                         on: {
                             "onAfterSelect": function(id) {
-                             		$$("imgClasses").setHTML( $$("mainImgTable").count());
+                                $$("imgClasses").setHTML($$("mainImgTable").count());
                                 selectedDataSet = $$("mainImgTable").getItem(id);
-                                		// console.log(selectedDataSet);
-		                        $$("mainThumbGallery").clearAll();
-                                $$("mainThumbGallery").parse( selectedDataSet.imgSet);
+                                // console.log(selectedDataSet);
+                                $$("mainThumbGallery").clearAll();
+                                $$("mainThumbGallery").parse(selectedDataSet.imgSet);
 
-								  // ]},m.setHTML("HII"
-								  	$$("imgCount").setHTML( $$("mainThumbGallery").count());
-                                 }
+                                // ]},m.setHTML("HII"
+                                $$("imgCount").setHTML($$("mainThumbGallery").count());
+                            }
                         }
 
                     },
-                    mainThumbGallery
+                    mainThumbGallery,
+                    dragAndDropTarget
                 ]
 
 
@@ -109,8 +128,7 @@
 </body>
 
 </html>
-
- <!-- // type: {
+<!-- // type: {
     //        height: 60,
     //    },
     //    template:"<div class='webix_strong'>#title#</div> Year: #year#, rank: #rank#",

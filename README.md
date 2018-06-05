@@ -67,3 +67,12 @@ mkvirtualenv KerasSimpsons -r requirements.txt
 
 We want these plots:
 https://medium.com/alex-attia-blog/the-simpsons-character-recognition-using-keras-d8e1796eae36
+
+
+## Some tutorials for reference
+https://alliseesolutions.wordpress.com/2016/09/08/install-gpu-tensorflow-from-sources-w-ubuntu-16-04-and-cuda-8-0/
+
+## Used this for help setting up env
+https://www.pyimagesearch.com/2017/09/25/configuring-ubuntu-for-deep-learning-with-python/
+
+https://www.pyimagesearch.com/2017/09/27/setting-up-ubuntu-16-04-cuda-gpu-for-deep-learning-with-python/
