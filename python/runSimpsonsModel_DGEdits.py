@@ -11,7 +11,7 @@ import numpy as np
 data_root = os.sep+os.path.join('tmp', 'simpsons')
 dest_filename = os.path.join(data_root, 'simpsons_dataset.tar.gz')
 
-filename = '/home/dagutman/devel/KerasSimpsons_Tensorflow/simpsons_dataset.tar.gz'
+filename = '/home/dagutman/dev/KerasSimpsons_Tensorflow/simpsons_dataset.tar.gz'
 
 def maybe_extract(filename, force=False):
   root = os.path.splitext(os.path.splitext(filename)[0])[0]  # remove .tar.gz
@@ -33,8 +33,8 @@ data_folders = maybe_extract(filename)
 
 
 img_width, img_height = 64, 64
-train_data_dir = os.sep+os.path.join('home', 'dagutman', 'devel', 'KerasSimpsons',  'simpsons_dataset')
-validation_data_dir = os.sep+os.path.join('home', 'dagutman', 'devel', 'KerasSimpsons', 'kaggle_simpson_testset')
+train_data_dir = os.sep+os.path.join('home', 'dagutman', 'dev', 'KerasSimpsons',  'simpsons_dataset')
+validation_data_dir = os.sep+os.path.join('home', 'dagutman', 'dev', 'KerasSimpsons', 'kaggle_simpson_testset')
 
 nb_train_samples = 30000
 nb_validation_samples = 990
